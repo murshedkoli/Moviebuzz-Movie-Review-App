@@ -6,6 +6,8 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { AppRegistry } from 'react-native';
 import DrawerNavigation from './navigation/DrawerNavigation';
 import { LogBox } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 
 
 
@@ -25,9 +27,11 @@ AppRegistry.registerComponent(appName, () => Main);
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <DrawerNavigation />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <DrawerNavigation />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 

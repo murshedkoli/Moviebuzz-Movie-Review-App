@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
-import { StyleSheet, Button, View, Text, ScrollView, ActivityIndicator } from 'react-native'
-import React from 'react'
-import { Card, Title, Paragraph } from 'react-native-paper';
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, Button, View, Text, ScrollView, ActivityIndicator, ImageBackground } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context';
+import MoviesRow from '../component/MoviesRow';
+import SearchBar from '../component/SearchBar';
+import UserHeader from '../component/UserHeader';
 
 
 const HomeScreen = ({ navigation }) => {
@@ -27,43 +29,24 @@ const HomeScreen = ({ navigation }) => {
 
 
     return (
-        <ScrollView>
-            <View>
-                {movies.length ?
-                    movies.map((movie) => {
-                        const { movieName, thumbnail, movieStars } = movie;
+        <SafeAreaView>
+            <UserHeader navigation={navigation} />
+            <ScrollView >
 
-                        return (
-                            <Card
-                                key={movie._id}
-                                onPress={() => {
-                                    navigation.navigate('MoviePage', {
-                                        itemId: 86,
-                                        otherParam: movie,
-                                    });
-                                }}
-                                style={{ margin: 15 }}>
-                                <Card.Cover source={{ uri: thumbnail }} />
+                <SearchBar />
+                <MoviesRow movies={movies} navigation={navigation} />
 
-                                <Card.Content>
-                                    <Title>{movieName}</Title>
-                                    <Paragraph>{movieStars}</Paragraph>
-                                </Card.Content>
-
-
-                            </Card>
-
-
-                        )
-                    })
-                    : <ActivityIndicator size="large" color="#00ff00" />
-
-                }
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 
 export default HomeScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+
+    userNameStyle: {
+        fontSize: 18,
+    },
+
+})
