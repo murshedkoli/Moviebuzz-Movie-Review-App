@@ -7,7 +7,7 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 
 const MoviePage = ({ route, navigation }) => {
     const { itemId, otherParam } = route.params;
-    const { movieName, thumbnail, director, writers, realiseDate, trailer, movieStars, category, story, downloadLink1, downloadLink2, downloadLink3 } = otherParam;
+    const { movieName, thumbnail, director, writers, realiseDate, trailer, movieStars, category, story, genre } = otherParam;
     return (
         <ScrollView>
             <Card>
@@ -20,6 +20,7 @@ const MoviePage = ({ route, navigation }) => {
                 <Card.Content>
                     <Title>{movieName}</Title>
 
+                    <Paragraph>Genre: {genre}</Paragraph>
                     <Paragraph>Director: {director}</Paragraph>
                     <Paragraph>Writers: {writers}</Paragraph>
                     <Paragraph>Realise Date: {realiseDate}</Paragraph>

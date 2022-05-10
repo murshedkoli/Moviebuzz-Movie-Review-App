@@ -9,6 +9,8 @@ import KolkataScreen from '../screens/KolkataScreen';
 import KoreanScreen from '../screens/KoreanScreen';
 import SouthIdianScreen from '../screens/SouthIdianScreen';
 import OthersScreen from '../screens/OthersScreen';
+import CustomDrawer from '../component/CustomDrawer';
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 
@@ -17,60 +19,91 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
     return (
-        <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Navigator
+            screenOptions={{ headerShown: false, drawerLabelStyle: { marginLeft: -25 } }}
+            drawerContent={props => <CustomDrawer {...props} />} initialRouteName="Home">
             <Drawer.Screen name="Home" component={Home}
                 options={{
-                    title: 'MovieBuzz'
+                    title: 'Home',
+                    drawerIcon: (color) => (
+                        <MaterialIcons name="home" size={24} color={color} />
+                    )
+
                 }}
             />
 
 
             <Drawer.Screen name="Bollywood" component={BollywoodScreen}
                 options={{
-                    title: 'Bollywood Movies'
+                    title: 'Bollywood Movies',
+                    drawerIcon: (color) => (
+                        <MaterialIcons name="local-movies" size={24} color={color} />
+                    )
+
                 }}
             />
 
 
             <Drawer.Screen name="SouthIndian" component={SouthIdianScreen}
                 options={{
-                    title: 'SouthIndian Movies'
+                    title: 'SouthIndian Movies',
+                    drawerIcon: (color) => (
+                        <MaterialIcons name="movie" size={24} color={color} />
+                    )
                 }}
             />
 
             <Drawer.Screen name="Hollywood" component={HollywoodScreen}
                 options={{
-                    title: 'Hollywood Movies'
+                    title: 'Hollywood Movies',
+                    drawerIcon: (color) => (
+                        <MaterialIcons name="movie" size={24} color={color} />
+                    )
                 }}
             />
 
             <Drawer.Screen name="Kolkata" component={KolkataScreen}
                 options={{
-                    title: 'Kolkata Movies'
+                    title: 'Kolkata Movies',
+                    drawerIcon: (color) => (
+                        <MaterialIcons name="movie" size={24} color={color} />
+                    )
                 }}
             />
 
             <Drawer.Screen name="Bangladeshi" component={BangladeshiScreen}
                 options={{
-                    title: 'Bangladeshi Movies'
+                    title: 'Bangladeshi Movies',
+                    drawerIcon: (color) => (
+                        <MaterialIcons name="movie" size={24} color={color} />
+                    )
                 }}
             />
             <Drawer.Screen name="Korean" component={KoreanScreen}
                 options={{
-                    title: 'Korean Movies'
+                    title: 'Korean Movies',
+                    drawerIcon: (color) => (
+                        <MaterialIcons name="movie" size={24} color={color} />
+                    )
                 }}
             />
 
             <Drawer.Screen name="Others" component={OthersScreen}
                 options={{
-                    title: 'Others Movies'
+                    title: 'Others Movies',
+                    drawerIcon: (color) => (
+                        <MaterialIcons name="movie-filter" size={24} color={color} />
+                    )
                 }}
             />
 
 
             <Drawer.Screen name="TVSeries" component={TVSeriesScreen}
                 options={{
-                    title: 'TV Series'
+                    title: 'TV Series',
+                    drawerIcon: (color) => (
+                        <MaterialIcons name="live-tv" size={24} color={color} />
+                    )
                 }}
             />
         </Drawer.Navigator>
