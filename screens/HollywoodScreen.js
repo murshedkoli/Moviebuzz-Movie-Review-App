@@ -26,7 +26,7 @@ const HollyWoodScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView>
-            <UserHeader navigation={navigation} />
+            <UserHeader navigation={navigation} title='Hollywood Movies' />
             <ScrollView >
 
                 <MoviesRow movies={movies} navigation={navigation} />

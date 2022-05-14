@@ -30,7 +30,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView>
-            <UserHeader navigation={navigation} />
+            <UserHeader navigation={navigation} title='MovieBuzz' />
             <ScrollView >
 
                 <SearchBar />
@@ -44,9 +44,5 @@ const HomeScreen = ({ navigation }) => {
 export default HomeScreen
 
 const styles = StyleSheet.create({
-
-    userNameStyle: {
-        fontSize: 18,
-    },
 
 })

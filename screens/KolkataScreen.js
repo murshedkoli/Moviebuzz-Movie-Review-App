@@ -27,7 +27,7 @@ const KolkataScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView>
-            <UserHeader navigation={navigation} />
+            <UserHeader navigation={navigation} title='Kolkata Movies' />
             <ScrollView >
 
                 <MoviesRow movies={movies} navigation={navigation} />

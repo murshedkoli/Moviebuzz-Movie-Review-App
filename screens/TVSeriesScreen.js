@@ -28,7 +28,7 @@ const TVSeriesScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView>
-            <UserHeader navigation={navigation} />
+            <UserHeader navigation={navigation} title='TV Series' />
             <ScrollView >
 
                 <MoviesRow movies={movies} navigation={navigation} />
