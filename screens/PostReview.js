@@ -1,20 +1,21 @@
 import { StyleSheet, Text, View, Image, ScrollView, ToastAndroid } from 'react-native'
-import React, { useState, } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, TextInput } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import UserHeader from '../component/UserHeader';
+import * as ImagePicker from 'expo-image-picker';
+import axios from 'axios'
+import { Platform } from 'react-native-web';
+
 
 
 const PostReview = ({ navigation }) => {
 
 
+    const [selectedImage, setSelectedImage] = useState(null);
 
-    const [imageUrl, setImageUrl] = useState(
-        'https://www.thedome.org/wp-content/uploads/2019/06/300x300-Placeholder-Image.jpg'
-    );
-
-    const [uploadPercentage, setUploadPercentage] = useState(0);
+    const [imageUrl, setImageUrl] = useState(null);
 
     const [selectedGenre, setSelectedGenre] = useState();
     const [selectedCategory, setSelectedCategory] = useState()
@@ -36,14 +37,32 @@ const PostReview = ({ navigation }) => {
 
 
 
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [16, 9],
+            quality: 1,
+        });
+
+        console.log("pick result" + result);
+
+        if (!result.cancelled) {
+            setSelectedImage(result.uri);
+            uploadImage(result)
+        }
+    };
+
     const handleInput = (value, fieldName) => {
 
         setMovieData({ ...movieData, [fieldName]: value })
 
     }
 
-    const BaseUrl = 'https://kolimoviebuzz.herokuapp.com/';
-    const urlLocal = 'htpp://localhost:5000/'
+    // const BaseUrl = 'https://kolimoviebuzz.herokuapp.com/';
+    // const urlLocal = 'htpp://localhost:5000/'
 
     const handleSubmit = (e) => {
 
@@ -65,10 +84,11 @@ const PostReview = ({ navigation }) => {
                         ToastAndroid.show('Review Update successfully!', ToastAndroid.LONG);
 
                         navigation.navigate('Home')
+                        console.log(result.msg)
 
                     } else {
                         ToastAndroid.show('Review Not Update!', ToastAndroid.SHORT);
-
+                        console.log(result.msg)
                     }
 
                 })
@@ -84,93 +104,43 @@ const PostReview = ({ navigation }) => {
 
 
 
-    const handleImgUpload = event => {
-
-        const image = event.target.files[0];
-        const imagefile = event.target;
-
-
-        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-
-
-        if (!allowedExtensions.exec(imagefile.value)) {
-            ToastAndroid.show('Request sent successfully!', ToastAndroid.SHORT);
-
-
-            imagefile.value = "";
-        }
-
-
-        if (image.size > 500000) {
-            ToastAndroid.show('Request sent successfully!', ToastAndroid.SHORT);
-
-            imagefile.value = "";
-        }
-
-
-        else {
-            uploadImage(image)
-        }
-
-    }
 
 
 
-    const uploadImage = (image) => {
-
-        const imageData = new FormData();
-        imageData.set('key', 'b24984d25dcce8d78b7e6427dade3d03')
-        imageData.append('image', image);
+    const uploadImage = (imageres) => {
 
 
-        const options = {
-            onUploadProgress: (ProgressEvent) => {
-                const { loaded, total } = ProgressEvent;
-                let percent = Math.floor((loaded * 100) / total)
+        const datas = new FormData();
+        datas.set('key', 'b24984d25dcce8d78b7e6427dade3d03')
+        datas.append('image', imageres);
 
-                if (percent < 100) {
-                    setUploadPercentage(percent)
-                }
-            }
-        }
 
-        axios.post('https://api.imgbb.com/1/upload', imageData, options)
+
+        console.log(datas)
+
+        axios.post('https://api.imgbb.com/1/upload', datas)
             .then(response => {
                 setImageUrl(response.data.data.display_url);
-                setUploadPercentage(100, () => {
-                    setTimeout(() => {
-                        setUploadPercentage(0);
-                    }, 1000);
-                })
+                console.log(response.data.data.display_url)
             })
             .catch(err => {
             });
     }
 
 
-
-
     return (
         <SafeAreaView>
             <UserHeader navigation={navigation} title='Review Form' />
             <ScrollView >
-                <Text style={{ textAlign: 'center', fontSize: 20, padding: 10, fontWeight: 'bold', color: 'gray' }}>Post A Review </Text>
                 <View style={styles.container}>
 
-                    <Image source={{ uri: imageUrl }} alt="profile" />
-                    {/* {
-                            uploadPercentage > 0 &&
-                            <View class="progress" style={{ marginBottom: '15px' }}>
-                                <View class={"progress-bar progress-bar-striped " + (uploadPercentage > 80 ? 'bg-success' : 'bg-danger')} role="progressbar" style={{ width: uploadPercentage + '%' }} aria-valuenow={uploadPercentage} aria-valuemin="0" aria-valuemax="100">{uploadPercentage}%</View>
-                                <br /><br />
-                            </View>
-                        } */}
 
-
-
-
-
-                    <TextInput onChange={handleImgUpload} name='thubmnail' id='thubmnail' type="file" />
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <Button style={{ marginBottom: 20, marginTop: 20 }} mode="contained" onPress={pickImage}>
+                            Select the Featured Image
+                        </Button>
+                        {selectedImage && <Image source={{ uri: imageUrl }} style={{ width: '100%', height: 200, borderRadius: 10 }} />}
+                    </View>
 
 
 
@@ -283,7 +253,7 @@ export default PostReview
 const styles = StyleSheet.create({
     container: {
         padding: 10,
-        marginBottom: 20
+        marginBottom: 50
 
     }
 })
