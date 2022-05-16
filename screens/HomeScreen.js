@@ -31,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
     return (
         <SafeAreaView>
             <UserHeader navigation={navigation} title='MovieBuzz' />
-            <ScrollView >
+            <ScrollView style={{ backgroundColor: 'rgba(17, 17, 94, 0.39)', paddingTop: 20 }}>
 
                 <SearchBar />
                 <MoviesRow movies={movies} navigation={navigation} />

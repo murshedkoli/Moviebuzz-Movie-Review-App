@@ -1,12 +1,10 @@
-import { StyleSheet, Text, View, Image, ScrollView, ToastAndroid } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView, ToastAndroid, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { Button, TextInput } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import UserHeader from '../component/UserHeader';
-import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios'
-import { Platform } from 'react-native-web';
 
 
 
@@ -38,22 +36,6 @@ const PostReview = ({ navigation }) => {
 
 
 
-    const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [16, 9],
-            quality: 1,
-        });
-
-        console.log("pick result" + result);
-
-        if (!result.cancelled) {
-            setSelectedImage(result.uri);
-            uploadImage(result)
-        }
-    };
 
     const handleInput = (value, fieldName) => {
 
@@ -136,10 +118,13 @@ const PostReview = ({ navigation }) => {
 
 
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                        <Button style={{ marginBottom: 20, marginTop: 20 }} mode="contained" onPress={pickImage}>
-                            Select the Featured Image
-                        </Button>
-                        {selectedImage && <Image source={{ uri: imageUrl }} style={{ width: '100%', height: 200, borderRadius: 10 }} />}
+
+                        {selectedImage ? <Image source={{ uri: imageUrl }} style={{ width: '100%', height: 200, borderRadius: 10 }} /> :
+
+                            <TouchableOpacity style={{ width: '100%', height: 200, borderRadius: 10, borderColor: 'gray' }}>
+                                <Text>Select Feature Image</Text>
+                            </TouchableOpacity>
+                        }
                     </View>
 
 
