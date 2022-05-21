@@ -16,7 +16,7 @@ const KolkataScreen = ({ navigation }) => {
             .then(result => result.json())
             .then(data => {
 
-                const movieshere = data.filter(item => item.category === "Tallywood");
+                const movieshere = data.filter(item => item.category === "কলকাতা");
                 setMovies(movieshere.reverse());
 
 

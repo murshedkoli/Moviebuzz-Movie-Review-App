@@ -17,7 +17,7 @@ const BollywoodScreen = ({ navigation }) => {
             .then(data => {
 
 
-                const movieshere = data.filter(item => item.category === "Bollywood");
+                const movieshere = data.filter(item => item.category === "বলিউড");
                 setMovies(movieshere.reverse());
 
 

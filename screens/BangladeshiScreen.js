@@ -16,7 +16,7 @@ const BangladeshiScreen = ({ navigation }) => {
             .then(result => result.json())
             .then(data => {
 
-                const movieshere = data.filter(item => item.category === "Dhallywood");
+                const movieshere = data.filter(item => item.category === "বাংলাদেশি");
                 setMovies(movieshere.reverse());
 
 

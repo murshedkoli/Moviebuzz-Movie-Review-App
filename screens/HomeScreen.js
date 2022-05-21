@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Button, View, Text, ScrollView, ActivityIndicator, ImageBackground } from 'react-native'
+import { StyleSheet, RefreshControl, ScrollView, } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MoviesRow from '../component/MoviesRow';
 import SearchBar from '../component/SearchBar';
 import UserHeader from '../component/UserHeader';
 
 
+const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 const HomeScreen = ({ navigation }) => {
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
+
 
 
     const [movies, setMovies] = useState([]);
+    console.log(movies)
 
     useEffect(() => {
         fetch('https://kolimoviebuzz.herokuapp.com/movies')
@@ -24,14 +38,16 @@ const HomeScreen = ({ navigation }) => {
                 // }
 
             })
-    }, [])
+    }, [refreshing])
 
 
 
     return (
         <SafeAreaView>
             <UserHeader navigation={navigation} title='MovieBuzz' />
-            <ScrollView style={{ backgroundColor: 'rgba(17, 17, 94, 0.39)', paddingTop: 20 }}>
+            <ScrollView
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                style={{ backgroundColor: 'rgba(17, 17, 94, 0.39)', paddingTop: 20 }}>
 
                 <SearchBar />
                 <MoviesRow movies={movies} navigation={navigation} />

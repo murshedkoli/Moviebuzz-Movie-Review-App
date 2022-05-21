@@ -16,7 +16,7 @@ const HollyWoodScreen = ({ navigation }) => {
             .then(result => result.json())
             .then(data => {
 
-                const movieshere = data.filter(item => item.category === "Hollywood");
+                const movieshere = data.filter(item => item.category === "হলিউড");
                 setMovies(movieshere.reverse());
 
             })

@@ -28,7 +28,7 @@ const SouthIndianScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView>
-            <UserHeader navigation={navigation} title='South Indian Movies' />
+            <UserHeader navigation={navigation} title='সাউথ ইন্ডিয়ান' />
             <ScrollView >
 
                 <MoviesRow movies={movies} navigation={navigation} />

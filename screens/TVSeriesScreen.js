@@ -17,7 +17,7 @@ const TVSeriesScreen = ({ navigation }) => {
             .then(data => {
 
 
-                const movieshere = data.filter(item => item.category === "TVSeries");
+                const movieshere = data.filter(item => item.category === "টিভি সিরিজ");
                 setMovies(movieshere.reverse());
 
 

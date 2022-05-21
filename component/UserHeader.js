@@ -3,7 +3,6 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import { Appbar } from 'react-native-paper';
 
 
 

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import React from 'react'
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { Card, Title, Paragraph } from 'react-native-paper';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import UserHeader from '../component/UserHeader';
@@ -22,13 +22,13 @@ const MoviePage = ({ route, navigation }) => {
 
                 <Card style={styles.container}>
                     <Card.Content>
-                        <Title>{movieName}</Title>
+                        <Title style={{ fontSize: 25 }}>{movieName}</Title>
 
-                        <Paragraph>Genre: {genre}</Paragraph>
-                        <Paragraph>Director: {director}</Paragraph>
-                        <Paragraph>Writers: {writers}</Paragraph>
-                        <Paragraph>Realise Date: {realiseDate}</Paragraph>
-                        <Paragraph>Stars : {movieStars}</Paragraph>
+                        <Paragraph><Text style={{ fontSize: 15, fontWeight: 'bold' }}>ধরণঃ</Text> {genre}</Paragraph>
+                        <Paragraph><Text style={{ fontSize: 15, fontWeight: 'bold' }}>পরিচালকঃ</Text> {director}</Paragraph>
+                        <Paragraph><Text style={{ fontSize: 15, fontWeight: 'bold' }}>লেখকঃ</Text> {writers}</Paragraph>
+                        <Paragraph><Text style={{ fontSize: 15, fontWeight: 'bold' }}>মুক্তির তারিখঃ</Text> {realiseDate}</Paragraph>
+                        <Paragraph><Text style={{ fontSize: 15, fontWeight: 'bold' }}>তারকাঃ</Text> {movieStars}</Paragraph>
 
                     </Card.Content>
                     <View style={styles.videoPlayer}>
@@ -40,12 +40,12 @@ const MoviePage = ({ route, navigation }) => {
                         />
                     </View>
                     <Card.Content>
-                        <Title>Story of this movie: </Title>
+                        <Title>কাহিণীঃ </Title>
                         <Paragraph>{story}</Paragraph>
                     </Card.Content>
 
                     <Card.Content>
-                        <Text>For Links visit: www.movie-download.link</Text>
+                        <Text>ডাউনলোড লিংক এর জন্যঃ www.movie-download.link</Text>
 
                     </Card.Content>
                 </Card>

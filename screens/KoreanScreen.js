@@ -16,7 +16,7 @@ const KoreanScreen = ({ navigation }) => {
             .then(result => result.json())
             .then(data => {
 
-                const movieshere = data.filter(item => item.category === "Korean");
+                const movieshere = data.filter(item => item.category === "কোরিয়ান");
                 setMovies(movieshere.reverse());
 
 

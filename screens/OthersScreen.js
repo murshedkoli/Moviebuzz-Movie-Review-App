@@ -16,7 +16,7 @@ const OthersScreen = ({ navigation }) => {
             .then(result => result.json())
             .then(data => {
 
-                const movieshere = data.filter(item => item.category === "Other");
+                const movieshere = data.filter(item => item.category === "অন্যান্য দেশের");
                 setMovies(movieshere.reverse());
 
 
